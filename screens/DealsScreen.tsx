@@ -21,30 +21,27 @@ const DealsScreen = ({ navigation }: RootTabScreenProps<'Deals'>) => {
   const renderProduct = ({ product }) => {
     <Item product={product} />
   }
+  const getDealsFromApi = async () => {
+    let response = await
 
-  useEffect(() => {
-    setLoading(true);
-    const getDealsFromApi = async () => {
-      let response = await
+      fetch('http://52.89.75.192/deals?records=60', {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
 
-        fetch('http://52.89.75.192/deals?records=60', {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-          }
-
-        });
-      const dataJSON = await response.json();
-      let products = dataJSON.products;
-      setLoading(false);
-      return fetchProducts(products);
+      });
+    const dataJSON = await response.json();
+    let products = dataJSON.products;
+    setLoading(false);
+    return fetchProducts(products);
 
 
-    }
-    getDealsFromApi();
+  }
 
-  });
+  useEffect(getDealsFromApi); 
+
 
   return (
     <SafeAreaView style={styles.container}>
