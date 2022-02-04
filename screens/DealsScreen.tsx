@@ -40,15 +40,17 @@ const DealsScreen = ({ navigation }: RootTabScreenProps<'Deals'>) => {
 
   }
 
-  useEffect(getDealsFromApi); 
+  useEffect(()=>{
+    getDealsFromApi();
+  },[])
 
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Deals</Text>
       <View style={styles.separator} />
-    <ActivityIndicator size={'large'}  loading={loading} />
-    {products?products.map(product=>{return(<View key={product.id}><Text>{product.low_price}</Text></View>)}):null}
+      <ActivityIndicator size={'large'} loading={loading} />
+      {products ? products.map(product => { return (<View key={product.id}><Text>{product.low_price}</Text></View>) }) : null}
     </SafeAreaView>
   );
 }
@@ -71,7 +73,7 @@ const styles = StyleSheet.create({
     width: '80%',
     color: 'lightblue'
   },
- 
+
   card: {}
 });
 export default DealsScreen;
