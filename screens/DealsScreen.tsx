@@ -1,43 +1,58 @@
-import { StyleSheet, Dimensions, View, Text } from 'react-native';
+import { StyleSheet, Dimensions, View, Text, FlatList, SafeAreaView, ActivityIndicator } from 'react-native';
 import { useEffect, useState } from 'react';
 import { RootTabScreenProps } from '../types';
 
 
+
+const Item = ({ image, msrp }) => (
+  <View style={styles.card}>
+
+    <Text>{msrp}</Text>
+    <Text>{image}</Text>
+  </View>
+)
 
 
 
 const DealsScreen = ({ navigation }: RootTabScreenProps<'Deals'>) => {
   const [loading, setLoading] = useState(false);
   const [products, fetchProducts] = useState();
+
+  const renderProduct = ({ product }) => {
+    <Item product={product} />
+  }
+
   useEffect(() => {
+    setLoading(true);
     const getDealsFromApi = async () => {
-      let response = await 
-  
-      fetch('http://52.89.75.192/deals?records=60', {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        }
-     
-      });
-     const dataJSON = await response.json()
-     let products = dataJSON.products;
+      let response = await
+
+        fetch('http://52.89.75.192/deals?records=60', {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          }
+
+        });
+      const dataJSON = await response.json();
+      let products = dataJSON.products;
+      setLoading(false);
       return fetchProducts(products);
-      
+
+
     }
     getDealsFromApi();
-    
+
   });
 
   return (
-    <View  style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Deals</Text>
       <View style={styles.separator} />
-      <View>
-        {products ? products.map(product => {return(<Text key={product.id}>{product.low_price}</Text>)}):null}
-      </View>
-    </View>
+    <ActivityIndicator size={'large'}  loading={loading} />
+    {products?products.map(product=>{return(<View key={product.id}><Text>{product.low_price}</Text></View>)}):null}
+    </SafeAreaView>
   );
 }
 
@@ -59,5 +74,7 @@ const styles = StyleSheet.create({
     width: '80%',
     color: 'lightblue'
   },
+ 
+  card: {}
 });
 export default DealsScreen;
