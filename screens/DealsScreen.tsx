@@ -16,7 +16,7 @@ const Item = ({ image, msrp }) => (
 
 const DealsScreen = ({ navigation }: RootTabScreenProps<'Deals'>) => {
   const [loading, setLoading] = useState(false);
-  const [products, fetchProducts] = useState();
+  const [products, fetchProducts] = useState([]);
 
   const renderProduct = ({ product }) => {
     <Item product={product} />
@@ -31,9 +31,8 @@ const DealsScreen = ({ navigation }: RootTabScreenProps<'Deals'>) => {
         }
       });
     const dataJSON = await response.json();
-    let products = dataJSON.products;
     setLoading(false);
-    return fetchProducts(products);
+    return fetchProducts(dataJSON.products);
   };
 
   useEffect(()=>{
