@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions, View, Text, Card, FlatList, SafeAreaView, ActivityIndicator } from 'react-native';
+import { StyleSheet, Dimensions, View, Text, FlatList, SafeAreaView, ActivityIndicator } from 'react-native';
 import { useEffect, useState } from 'react';
 import { RootTabScreenProps } from '../types';
 import ProductCard from '../components/ProductCard';
@@ -7,11 +7,13 @@ const DealsScreen = ({ navigation }: RootTabScreenProps<'Deals'>) => {
   const [loading, setLoading] = useState(false);
   const [products, fetchProducts] = useState([]);
 
-  const renderProduct = (product:Object<{item:string}>) => {
+  const renderProduct = (product: Object) => {
+    console.log(product.item)
     return <ProductCard product={product.item} />;
-   };
+  };
   const getDealsFromApi = async () => {
-    let response = await fetch('http://52.89.75.192/deals?records=10', 
+    setLoading(true);
+    let response = await fetch('http://52.89.75.192/deals?records=10',
       {
         method: 'GET',
         headers: {
@@ -24,20 +26,20 @@ const DealsScreen = ({ navigation }: RootTabScreenProps<'Deals'>) => {
     return fetchProducts(dataJSON.products);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     getDealsFromApi();
-  },[])
+  }, [])
 
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Deals</Text>
       <View style={styles.separator} />
-      <ActivityIndicator size={'large'} loading={false} />
+      <ActivityIndicator size={'large'} loading={loading} />
       <FlatList
-      data={products}
-      renderItem={renderProduct}
-      keyExtractor={product=>product.id}
+        data={products}
+        renderItem={renderProduct}
+        keyExtractor={product => product.id}
       />
     </SafeAreaView>
   );

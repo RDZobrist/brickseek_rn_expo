@@ -29,7 +29,19 @@ export type RootTabParamList = {
   Info: undefined;
 };
 
+
+
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
   BottomTabScreenProps<RootTabParamList, Screen>,
   NativeStackScreenProps<RootStackParamList>
 >;
+
+export interface ProductCard  {
+  id: string;
+  low_price: number;
+  image: string;
+  msrp: number;
+  type: string;
+  name: string;
+  amount_saved: number;
+  };
