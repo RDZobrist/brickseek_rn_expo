@@ -8,8 +8,8 @@ const DealsScreen = ({ navigation }: RootTabScreenProps<'Deals'>) => {
   const [products, fetchProducts] = useState([]);
 
   const renderProduct = (product: Object) => {
-    console.log(product.item)
-    return <ProductCard product={product.item} />;
+    product = product.item;
+    return <ProductCard product={product} />;
   };
   const getDealsFromApi = async () => {
     setLoading(true);
@@ -21,8 +21,9 @@ const DealsScreen = ({ navigation }: RootTabScreenProps<'Deals'>) => {
           'Content-Type': 'application/json'
         }
       });
+      setLoading(false);
+
     const dataJSON = await response.json();
-    setLoading(false);
     return fetchProducts(dataJSON.products);
   };
 
@@ -33,14 +34,12 @@ const DealsScreen = ({ navigation }: RootTabScreenProps<'Deals'>) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Deals</Text>
-      <View style={styles.separator} />
-      <ActivityIndicator size={'large'} loading={loading} />
       <FlatList
         data={products}
         renderItem={renderProduct}
-        keyExtractor={product => product.id}
+        keyExtractor={(product, index) => index}
       />
+
     </SafeAreaView>
   );
 }
@@ -61,7 +60,7 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: '80%',
-    color: 'lightblue'
+    color: '#000000'
   },
 
   card: {}

@@ -20,16 +20,29 @@ export default ProductCard = product => {
 };
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginBottom:15,
-      marginTop:15,
-      borderRadius: 9,
-      borderBottomColor:'lightgray'
+      height: 90,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ffffff',
+    borderRadius: 15,
+    shadowColor: '#bdbdbd',
+    shadowOffset: {width: 0, height: 0},
+    shadowOpacity: 1,
+    shadowRadius: 8,
+    elevation: 8,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginTop: 15,
+    marginBottom: 5,
+    marginLeft: 7.5,
+    marginRight: 7.5,
+    height: Dimensions.get('window').height / 4.5,
+    width: Dimensions.get('window').width - 25
     },
     image: {
-      height: 200,
+      height: Dimensions.get('window').height / 6,
       width: 200
 
     }
