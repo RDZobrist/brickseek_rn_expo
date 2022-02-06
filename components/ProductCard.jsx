@@ -1,11 +1,20 @@
 import React, { Component, useState } from 'react';
-import { View, Text, Dimensions, SafeAreaView, StyleSheet, Image, Pressable, } from 'react-native';
+import { View, Text, Dimensions, SafeAreaView, StyleSheet, Image, Pressable} from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import  openURL  from '../utils';
 
-export default ProductCard = product => {
+export default ProductCard = (product, props) => {
   const [liked, toggleLike] = useState(false);
-  const { image, msrp, low_price, buy_link, id, name, type, store_icon_small } = product.product;
-  console.log(store_icon_small)
+  const { 
+    image, 
+    msrp, 
+    low_price, 
+    buy_link, 
+    id,
+    name,
+    type, 
+    store_icon_small } = product.product;
+    const navigation = props.navigation;
   return (
     <View style={styles.container} key={id}>
       <View style={styles.likedAndSmallLogoContainer}>
@@ -22,17 +31,16 @@ export default ProductCard = product => {
         style={styles.smallIcon}
       />
       </View>
-
-      <Text style={styles.title}>{name}</Text>
-
       <Image source={{ uri: image }}
         style={styles.image}
         resizeMode="contain"
       />
-
+      <Text style={styles.title}>{name}</Text>
       <Text style={styles.text}>{low_price}</Text>
       <Text style={styles.text}>{msrp}</Text>
-      <Text style={styles.text}>{buy_link}</Text>
+      <Pressable onPress={()=>{openURL(buy_link)}}>
+      <Text style={styles.text}>Go to This Deal</Text>
+      </Pressable>
     </View>
   )
 };
