@@ -4,7 +4,7 @@ import { View, Text, Dimensions, SafeAreaView, StyleSheet, Image, Pressable } fr
 import { AntDesign } from '@expo/vector-icons';
 import {openURL, formatCurrency, calculateAndFormatPercentSavings} from '../utils';
 
-export default ProductCard = (product, props) => {
+export default ProductCard = product => {
   const [liked, toggleLike] = useState(false);
   const {
     image,
@@ -15,7 +15,6 @@ export default ProductCard = (product, props) => {
     name,
     type,
     store_icon_small } = product.product;
-  const navigation = props.navigation;
   return (
     <View style={styles.container} key={id}>
       <View style={styles.likedAndSmallLogoContainer}>
