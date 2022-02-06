@@ -2,7 +2,7 @@ import React, { Component, useState } from 'react';
 import { NativeBaseProvider, Box, Badge } from 'native-base';
 import { View, Text, Dimensions, SafeAreaView, StyleSheet, Image, Pressable } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import openURL from '../utils';
+import {openURL, formatCurrency, calculateAndFormatPercentSavings} from '../utils';
 
 export default ProductCard = (product, props) => {
   const [liked, toggleLike] = useState(false);
@@ -26,13 +26,10 @@ export default ProductCard = (product, props) => {
             <AntDesign style={styles.likedHeart} name="hearto" size={25} color="red" />
           }
         </Pressable>
-        <View style={styles.dealTypeIcon}>
-
-          {type === '1' ?
-            <Text>Online</Text>
-            :
-            <Text>In-Store</Text>
-          }
+        <View style={styles.dealTypeBadge}>
+          <Text style={styles.dealTypeBadgeText}>
+            {type==="1"?'Online':'Store'}
+          </Text>
         </View>
 
 
@@ -48,20 +45,25 @@ export default ProductCard = (product, props) => {
       />
       <Text style={styles.title}>{name}</Text>
 
-      <View style={styles.priceAndDealContainer}>
+      <View style={styles.lowPriceAndMSRPcontainer}>
         <View style={styles.lowPriceBadge}>
-          <Text style={styles.lowPriceText}>{type==="1"?'Online:':'Store:'} ${low_price}</Text>
+          <Text style={styles.lowPriceText}>{formatCurrency(low_price)}</Text>
+          <Text style={styles.lowPriceText}>{type==="1"?'Online':'Store'}</Text>
         </View>
       
         <View style={styles.msrpBadge}>
-          <Text style={styles.msrpText}>{msrp}</Text>
+          <Text style={styles.msrpText}>{formatCurrency(msrp)}</Text>
+          <Text style={styles.msrpText}> MSRP</Text>
         </View>
       </View>
+      <Text style={styles.totalSavingsText}>{calculateAndFormatPercentSavings(msrp, low_price)} OFF!</Text>
+      <View style={styles.goToDealPressable}>
+
       <Pressable onPress={() => { openURL(buy_link) }}>
-          <View style={styles.gotToDealPressable}>
-            <Text style={styles.text}>View This Deal</Text>
-          </View>
+            <Text style={styles.presssableText}>View This Deal</Text>
         </Pressable>
+        </View>
+
     </View>
   )
 };
@@ -85,12 +87,12 @@ const styles = StyleSheet.create({
     marginBottom: 7.5,
     marginLeft: 7.5,
     marginRight: 7.5,
-    height: Dimensions.get('window').height / 3,
+    height: Dimensions.get('window').height / 2,
     width: Dimensions.get('window').width - 25
   },
   image: {
-    height: Dimensions.get('window').height / 8,
-    width: Dimensions.get('window').height / 8,
+    height: Dimensions.get('window').height / 7.5,
+    width: Dimensions.get('window').height / 7.5,
     borderRadius: 5.5
   },
   titleContainer: {
@@ -121,22 +123,28 @@ const styles = StyleSheet.create({
     marginHorizontal: 7,
     marginVertical: 7,
   },
-  dealTypeIcon: {
+  dealTypeBadge: {
     flex: .33,
     fontSize: 15,
     alignSelf: 'center',
     alignContent: 'center',
     borderRadius: 15,
     backgroundColor: '#61A4FF',
-    marginLeft: Dimensions.get('window').width / 10,
-    marginRight: Dimensions.get('window').width / 10,
+    marginLeft: Dimensions.get('window').width / 8,
+    marginRight: Dimensions.get('window').width / 8,
     paddingHorizontal: 25,
     paddingVertical: 3.5,
     marginBottom: '10%'
   
   },
+  dealTypeBadgeText: {
+    color: '#FFFFFF',
+    fontWeight: "800",
+    fontSize: 12,
+    alignSelf: 'center'
+  },
 
-  priceAndDealContainer: {
+  lowPriceAndMSRPcontainer: {
     flex: 1,
     flexDirection: 'row',
     marginBottom: 5
@@ -144,40 +152,40 @@ const styles = StyleSheet.create({
   lowPriceBadge: {
     alignContent: 'center',
     color: '#61A4FF',
-    maxWidth: Dimensions.get('window').width / 3,
+    maxWidth: Dimensions.get('window').width / 2,
     maxHeight: Dimensions.get('window').height / 25,
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 7,
-    marginLeft: '3%',
-    marginRight: '3%',
     marginTop: 10,
+    marginLeft: '10%',
+    marginRight:'10%',
     flex: .5
   },
   msrpBadge: {
     alignContent: 'center',
     color: '#fafafa',
-    maxWidth: Dimensions.get('window').width / 3,
+    maxWidth: Dimensions.get('window').width / 2,
     maxHeight: Dimensions.get('window').height / 25,
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 7,
-    marginLeft: '3%',
-    marginRight: '3%',
     marginTop: 10,
+    marginLeft: '10%',
+    marginRight:'10%',
     flex: .5
   },
   lowPriceText: {
-    fontSize: 22,
+    fontSize: 18,
     color: '#1457B3',
     fontWeight: '500'
   },
   msrpText: {
-    fontSize: 22,
-    color: 'lightgray',
+    fontSize: 18,
+    color: '#C5C5C5',
     fontWeight: '500'
   },
-  gotToDealPressable: {
+  goToDealPressable: {
     backgroundColor: '#61A4FF',
     maxWidth: Dimensions.get('window').width / 3,
     height: Dimensions.get('window').height / 25,
@@ -186,7 +194,18 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     marginLeft: '6.25%',
     marginRight: '6.25%',
-    marginTop: 10
+    marginTop: 10,
+    marginBottom: 5
      
+  },
+  presssableText: {
+    color: '#FFFFFF',
+    fontWeight: "500"
+  },
+  totalSavingsText: {
+    fontSize: 28,
+    fontWeight: '500',
+    color: '#61A4FF',
+    marginTop: 10
   }
 });
