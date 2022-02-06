@@ -13,7 +13,7 @@ const DealsScreen = ({ navigation }: RootTabScreenProps<'Deals'>) => {
   };
   const getDealsFromApi = async () => {
     setLoading(true);
-    let response = await fetch('http://52.89.75.192/deals?records=10',
+    let response = await fetch('http://52.89.75.192/deals?records=100',
       {
         method: 'GET',
         headers: {
