@@ -23,7 +23,6 @@ export const extractFilterValuesFromState =
     ultaSelected,wallmartSelected,amazonSelected,
     staplesSelected,officeDepotSelected,academySportsSelected
 ) => {
-    alert('pressed')
     let extractedFilterValues = [];
     targetSelected?extractedFilterValues.push("1"):null
     lowesSelected?extractedFilterValues.push("10"):null

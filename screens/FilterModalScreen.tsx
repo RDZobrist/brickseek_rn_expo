@@ -6,7 +6,7 @@ import StoresToFilterCard from '../components/StoresToFilterCard';
 import { formatCurrency, extractFilterValuesFromState } from '../utils';
 
 
-const FilterStoresModalScreen = props => {
+const FilterStoresModalScreen = (props) => {
   const [targetSelected, toggleTargetSelected] = useState(false);
   const [lowesSelected, toggleLowesSelected] = useState(false);
   const [homeDepotSelected, toggleHomeDepotSelected] = useState(false);
@@ -23,10 +23,12 @@ const FilterStoresModalScreen = props => {
   const [officeDepotSelected, toggleOfficeDepotSelected] = useState(false);
   const [academySportsSelected, toggleAcademysportsSelected] = useState(false);
 
+
   const fetchFilteredResults = () => {
-   return extractFilterValuesFromState(targetSelected, lowesSelected, homeDepotSelected,bedbathandbeyondSelected,bestBuySelected,
+    let filterVaules = extractFilterValuesFromState(targetSelected, lowesSelected, homeDepotSelected,bedbathandbeyondSelected,bestBuySelected,
       macysSelected,samsclubSelected,dollarGeneralSelected,kohlsSelected,ultaSelected,wallmartSelected,
       amazonSelected,staplesSelected,officeDepotSelected,academySportsSelected);
+      navigation.navigate('Deals', {filterVaules: filterVaules})
   };
 
 

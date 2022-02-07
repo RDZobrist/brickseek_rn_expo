@@ -3,11 +3,74 @@ import { useEffect, useState, useCallback } from 'react';
 import { RootTabScreenProps } from '../types';
 import ProductCard from '../components/ProductCard';
 
-const DealsScreen = ({ navigation }: RootTabScreenProps<'Deals'>) => {
+const DealsScreen = ({ navigation, route }: RootTabScreenProps<'Deals'>) => {
+  let filterParameters;
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [products, fetchProducts] = useState([]);
 
+  const routeParameters = route.params;
+  // if(route.params){
+  //   if(route.params.filterVaules){
+  //       let filterValues = route.params.filterVaules;
+  //       let itemsToFilter = filterValues.length;
+  //       let arrayInedexes = itemsToFilter - 1;
+  //       let filterParameters=[];
+  //       switch (arrayInedexes) {
+  //         case 0:
+  //           filterParameters = filterValues[0];
+  //            break;
+  //         case 1:
+  //           filterParameters = filterValues[0 && 1];
+  //           break;
+  //           case 2:
+  //           filterParameters = filterValues[0 && 1 && 2]
+  //           break;
+  //           case 3:
+  //           filterParameters = filterValues[0 && 1 && 2 && 3];
+  //           break;
+  //           case 4:
+  //           filterParameters = filterValues[0 && 1 && 2 && 3 && 4];
+  //           break;
+  //           case 5:
+  //           filterParameters = filterValues[0 && 1 && 2 && 3 && 4 && 5]
+  //           break;
+  //           case 6:
+  //           filterParameters = filterValues[0 && 1 && 2 && 3 && 4 && 5 && 6];
+  //           break;
+  //           case 7:
+  //           filterParameters = filterValues[0 && 1 && 2 && 3 && 4 && 5 && 6 && 7];
+  //           break;
+  //           case 8:
+  //           filterParameters = filterValues[0 && 1 && 2 && 3 && 4 && 5 && 6 && 7 && 8]
+  //           break;
+  //           case 9:
+  //             filterParameters = filterValues[0 && 1 && 2 && 3 && 4 && 5 && 6 && 7 && 8 && 9] 
+  //             break;
+  //             case 10:
+  //           filterParameters = filterValues[0 && 1 && 2 && 3 && 4 && 5 && 6 && 7 && 8 && 9 &&10 ]
+  //           break;
+  //           case 11:
+  //           filterParameters = filterValues[0 && 1 && 2 && 3 && 4 && 5 && 6 && 7 && 8 && 9 &&10&&11 ]
+  //           break;
+  //           case 12:
+  //             filterParameters = filterValues[0 && 1 && 2 && 3 && 4 && 5 && 6 && 7 && 8 && 9 && 10 && 11 && 12 ]
+  //             break;
+  //             case 13:
+  //           filterParameters = filterValues[0 && 1 && 2 && 3 && 4 && 5 && 6 && 7 && 8 && 9 && 10 && 11 && 12 && 14 ]
+  //           break;
+  //           case 14:
+  //           filterParameters = filterValues[0 && 1 && 2 && 3 && 4 && 5 && 6 && 7 && 8 && 9 && 10 && 11 && 12 && 14 && 15]
+  //           default:
+  //             return filterParameters
+
+  //       } 
+  //       console.log(filterParameters);
+        
+         
+     
+  //   } 
+  // }
   const renderProduct = (product: Object) => {
     product = product.item;
     return <ProductCard product={product} />;
