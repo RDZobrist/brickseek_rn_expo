@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Dimensions, FlatList, Pressable, Button } from 
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { Fontisto } from '@expo/vector-icons';
 import StoresToFilterCard from '../components/StoresToFilterCard';
-import { formatCurrency } from '../utils';
+import { formatCurrency, extractFilterValuesFromState } from '../utils';
 
 
 const FilterStoresModalScreen = props => {
@@ -22,6 +22,12 @@ const FilterStoresModalScreen = props => {
   const [staplesSelected, toggleStaplesSelected] = useState(false);
   const [officeDepotSelected, toggleOfficeDepotSelected] = useState(false);
   const [academySportsSelected, toggleAcademysportsSelected] = useState(false);
+
+  const fetchFilteredResults = () => {
+   return extractFilterValuesFromState(targetSelected, lowesSelected, homeDepotSelected,bedbathandbeyondSelected,bestBuySelected,
+      macysSelected,samsclubSelected,dollarGeneralSelected,kohlsSelected,ultaSelected,wallmartSelected,
+      amazonSelected,staplesSelected,officeDepotSelected,academySportsSelected);
+  };
 
 
   const [storesToFilterMap] = useState({
@@ -216,7 +222,7 @@ const FilterStoresModalScreen = props => {
       samsclubSelected||dollarGeneralSelected||bedbathandbeyondSelected||kohlsSelected||
       ultaSelected||academySportsSelected||wallmartSelected||amazonSelected||staplesSelected||
       officeDepotSelected ?      
-      <Button title='Fetch Filtererd Results' onPress={()=>{navigation.navigate('Deals')}} />
+      <Button title='Fetch Filtererd Results' onPress={()=>{fetchFilteredResults()}} />
       : null
     }
     </SafeAreaView>
