@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Dimensions, FlatList, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, FlatList, Pressable, Button } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { Fontisto } from '@expo/vector-icons';
 import StoresToFilterCard from '../components/StoresToFilterCard';
 import { formatCurrency } from '../utils';
 
 
-const FilterStoresModalScreen = () => {
+const FilterStoresModalScreen = props => {
   const [targetSelected, toggleTargetSelected] = useState(false);
   const [lowesSelected, toggleLowesSelected] = useState(false);
   const [homeDepotSelected, toggleHomeDepotSelected] = useState(false);
@@ -102,9 +102,11 @@ const FilterStoresModalScreen = () => {
   });
 
   let filterableStores = storesToFilterMap.store;
+  const navigation = props.navigation;
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Filter Stores</Text>
+      <Button title='< Go Back' color={'red'} onPress={()=>{navigation.navigate('Deals')}}/>
       <Pressable style={styles.card} onPress={() => { toggleTargetSelected(!targetSelected) }}>
         {targetSelected ?
           <Fontisto name="checkbox-active" size={24} color="green" />
@@ -210,6 +212,13 @@ const FilterStoresModalScreen = () => {
             <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />}        
             <Text style={styles.title}>{filterableStores.office_depot.displayName}</Text>
       </Pressable>
+      {targetSelected||lowesSelected||homeDepotSelected||bestBuySelected||macysSelected||
+      samsclubSelected||dollarGeneralSelected||bedbathandbeyondSelected||kohlsSelected||
+      ultaSelected||academySportsSelected||wallmartSelected||amazonSelected||staplesSelected||
+      officeDepotSelected ?      
+      <Button title='Fetch Filtererd Results' onPress={()=>{navigation.navigate('Deals')}} />
+      : null
+    }
     </SafeAreaView>
   );
 }

@@ -39,7 +39,7 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen name="FilterStores" component={ModalScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -68,7 +68,7 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="shopping-store" color={color} />,
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate('Modal')}
+              onPress={() => navigation.navigate('FilterStores')}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}>
