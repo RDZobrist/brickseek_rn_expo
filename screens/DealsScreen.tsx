@@ -41,7 +41,7 @@ const DealsScreen = ({ navigation }: RootTabScreenProps<'Deals'>) => {
       } catch (error) {
         console.error(error);
       }
-    });
+    },[]);
    
 
   useEffect(() => {
