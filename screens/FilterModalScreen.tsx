@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Dimensions, FlatList } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { Fontisto } from '@expo/vector-icons';
 import StoresToFilterCard from '../components/StoresToFilterCard';
 import { formatCurrency } from '../utils';
+
 
 const FilterStoresModalScreen = () => {
   const [storesToFilterMap] = useState({
@@ -82,59 +84,81 @@ const FilterStoresModalScreen = () => {
     }
   });
 
-
-  const renderStoreToFilter = (store: Object) => {
-
-    return <StoresToFilterCard product={store} />;
-  };
-
   let filterableStores = storesToFilterMap.store;
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Filter Stores</Text>
       <View style={styles.card}>
-        <Text style={styles.title}>{filterableStores.target.displayName}</Text>
+      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
+        <Text  style={styles.title}>{filterableStores.target.displayName}</Text>
       </View>
       <View style={styles.card}>
+      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
+
         <Text style={styles.title}>{filterableStores.lowes.displayName}</Text>
       </View>
       <View style={styles.card}>
+      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
+
         <Text style={styles.title}>{filterableStores.home_depot.displayName}</Text>
       </View>
       <View style={styles.card}>
+      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
+
         <Text style={styles.title}>{filterableStores.best_buy.displayName}</Text>
       </View>  
       <View style={styles.card}>
+      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
+
         <Text style={styles.title}>{filterableStores.macys.displayName}</Text>
       </View>  
       <View style={styles.card}>
+      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
+
         <Text style={styles.title}>{filterableStores.sams_club.displayName}</Text>
       </View>  
       <View style={styles.card}>
+      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
+
         <Text style={styles.title}>{filterableStores.dollar_general.displayName}</Text>
       </View>  
       <View style={styles.card}>
+      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
+
         <Text style={styles.title}>{filterableStores.bed_bath_and_beyond.displayName}</Text>
       </View>  
       <View style={styles.card}>
+      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
+
         <Text style={styles.title}>{filterableStores.kohls.displayName}</Text>
       </View>  
       <View style={styles.card}>
+      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
+
         <Text style={styles.title}>{filterableStores.ulta.displayName}</Text>
       </View>
       <View style={styles.card}>
+      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
+
         <Text style={styles.title}>{filterableStores.academy_sports.displayName}</Text>
       </View>
       <View style={styles.card}>
+      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
+
         <Text style={styles.title}>{filterableStores.walmart.displayName}</Text>
       </View>
       <View style={styles.card}>
+      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
+
         <Text style={styles.title}>{filterableStores.amazon_dot_com.displayName}</Text>
       </View>
       <View style={styles.card}>
+      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
+
         <Text style={styles.title}>{filterableStores.staples.displayName}</Text>
       </View>
       <View style={styles.card}>
+      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
         <Text style={styles.title}>{filterableStores.office_depot.displayName}</Text>
       </View>
     </SafeAreaView>
@@ -159,8 +183,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   card: {
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#ffffff',
     borderRadius: 12.5,
     flex: 1,
@@ -169,7 +191,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 3.33,
     elevation: 3.33,
-    flexDirection: 'column',
+    flexDirection: 'row',
     justifyContent: 'space-between',
     paddingLeft: 10,
     paddingRight: 10,
@@ -177,8 +199,8 @@ const styles = StyleSheet.create({
     marginBottom: 7.5,
     marginLeft: 7.5,
     marginRight: 7.5,
-    height: Dimensions.get('window').height / 10,
-    width: Dimensions.get('window').width - 7.5
+    height: Dimensions.get('window').height / 4,
+    width: Dimensions.get('window').width -10.5
   }
 
 });

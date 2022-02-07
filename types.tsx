@@ -45,3 +45,11 @@ export interface ProductCard  {
   name: string;
   amount_saved: number;
   };
+
+export interface storesToFilterMap {
+  store:{
+    filterValue: string,
+    displayName: string
+  }
+}
+
