@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Dimensions, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, FlatList, Pressable } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { Fontisto } from '@expo/vector-icons';
 import StoresToFilterCard from '../components/StoresToFilterCard';
@@ -7,6 +7,23 @@ import { formatCurrency } from '../utils';
 
 
 const FilterStoresModalScreen = () => {
+  const [targetSelected, toggleTargetSelected] = useState(false);
+  const [lowesSelected, toggleLowesSelected] = useState(false);
+  const [homeDepotSelected, toggleHomeDepotSelected] = useState(false);
+  const [bestBuySelected, togglebestBuySelected] = useState(false);
+  const [macysSelected, togglemacysSelected] = useState(false);
+  const [samsclubSelected, toggleSamsclubSelected] = useState(false);
+  const [dollarGeneralSelected, toggledollarGeneralSelected] = useState(false);
+  const [bedbathandbeyondSelected, togglebedbathandbeyondSelected] = useState(false);
+  const [kohlsSelected, togglekohlsSelected] = useState(false);
+  const [ultaSelected, toggleUltaSelected] = useState(false);
+  const [wallmartSelected, toggleWallmartSelected] = useState(false);
+  const [amazonSelected, toggleAmazonSelected] = useState(false);
+  const [staplesSelected, toggleStaplesSelected] = useState(false);
+  const [officeDepotSelected, toggleOfficeDepotSelected] = useState(false);
+  const [academySportsSelected, toggleAcademysportsSelected] = useState(false);
+
+
   const [storesToFilterMap] = useState({
     store: {
       "target": {
@@ -88,79 +105,111 @@ const FilterStoresModalScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Filter Stores</Text>
-      <View style={styles.card}>
-      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
-        <Text  style={styles.title}>{filterableStores.target.displayName}</Text>
-      </View>
-      <View style={styles.card}>
-      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
-
-        <Text style={styles.title}>{filterableStores.lowes.displayName}</Text>
-      </View>
-      <View style={styles.card}>
-      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
-
+      <Pressable style={styles.card} onPress={() => { toggleTargetSelected(!targetSelected) }}>
+        {targetSelected ?
+          <Fontisto name="checkbox-active" size={24} color="green" />
+          :
+          <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />}
+        <Text style={styles.title}>{filterableStores.target.displayName}</Text>
+      </Pressable>
+      <Pressable style={styles.card} onPress={() => { toggleLowesSelected(!lowesSelected) }}>
+        {lowesSelected ?
+            <Fontisto name="checkbox-active" size={24} color="green" />
+            :
+            <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />}        
+            <Text style={styles.title}>{filterableStores.lowes.displayName}</Text>
+      </Pressable>
+      <Pressable style={styles.card} onPress={() => toggleHomeDepotSelected(!homeDepotSelected)}>
+      {homeDepotSelected ?
+          <Fontisto name="checkbox-active" size={24} color="green" />
+          :
+          <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />}
         <Text style={styles.title}>{filterableStores.home_depot.displayName}</Text>
-      </View>
-      <View style={styles.card}>
-      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
-
+      </Pressable>
+      <Pressable style={styles.card} onPress={() => { togglebestBuySelected(!bestBuySelected) }}>
+      {bestBuySelected ?
+            <Fontisto name="checkbox-active" size={24} color="green" />
+            :
+            <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />}       
         <Text style={styles.title}>{filterableStores.best_buy.displayName}</Text>
-      </View>  
-      <View style={styles.card}>
-      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
-
+      </Pressable>
+      <Pressable style={styles.card} onPress={() => { togglemacysSelected(!macysSelected) }}>
+      {macysSelected ?
+            <Fontisto name="checkbox-active" size={24} color="green" />
+            :
+            <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />}       
         <Text style={styles.title}>{filterableStores.macys.displayName}</Text>
-      </View>  
-      <View style={styles.card}>
-      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
-
+      </Pressable>
+      <Pressable style={styles.card} onPress={() => { toggleSamsclubSelected(!samsclubSelected) }}>
+      {samsclubSelected ?
+            <Fontisto name="checkbox-active" size={24} color="green" />
+            :
+            <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />}
         <Text style={styles.title}>{filterableStores.sams_club.displayName}</Text>
-      </View>  
-      <View style={styles.card}>
-      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
-
+      </Pressable>
+      <Pressable style={styles.card} onPress={() => { toggledollarGeneralSelected(!dollarGeneralSelected) }}>
+      {dollarGeneralSelected ?
+            <Fontisto name="checkbox-active" size={24} color="green" />
+            :
+            <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />}    
         <Text style={styles.title}>{filterableStores.dollar_general.displayName}</Text>
-      </View>  
-      <View style={styles.card}>
-      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
-
+      </Pressable>
+      <Pressable style={styles.card} onPress={() => { togglebedbathandbeyondSelected(!bedbathandbeyondSelected) }}>        
+      {bedbathandbeyondSelected ?
+            <Fontisto name="checkbox-active" size={24} color="green" />
+            :
+            <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />}
         <Text style={styles.title}>{filterableStores.bed_bath_and_beyond.displayName}</Text>
-      </View>  
-      <View style={styles.card}>
-      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
-
+      </Pressable>
+      <Pressable style={styles.card} onPress={() => { togglekohlsSelected(!kohlsSelected) }}>
+      {kohlsSelected ?
+            <Fontisto name="checkbox-active" size={24} color="green" />
+            :
+            <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />}
         <Text style={styles.title}>{filterableStores.kohls.displayName}</Text>
-      </View>  
-      <View style={styles.card}>
-      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
-
+      </Pressable>
+      <Pressable style={styles.card} onPress={() => { toggleUltaSelected(!ultaSelected) }}>
+      {ultaSelected ?
+            <Fontisto name="checkbox-active" size={24} color="green" />
+            :
+            <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />}
         <Text style={styles.title}>{filterableStores.ulta.displayName}</Text>
-      </View>
-      <View style={styles.card}>
-      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
-
+      </Pressable>
+      <Pressable style={styles.card} onPress={() => { toggleAcademysportsSelected(!academySportsSelected) }}>
+      {academySportsSelected ?
+            <Fontisto name="checkbox-active" size={24} color="green" />
+            :
+            <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />}
         <Text style={styles.title}>{filterableStores.academy_sports.displayName}</Text>
-      </View>
-      <View style={styles.card}>
-      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
-
+      </Pressable>
+      <Pressable style={styles.card} onPress={() => { toggleWallmartSelected(!wallmartSelected) }}>
+      {wallmartSelected ?
+            <Fontisto name="checkbox-active" size={24} color="green" />
+            :
+            <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />}
         <Text style={styles.title}>{filterableStores.walmart.displayName}</Text>
-      </View>
-      <View style={styles.card}>
-      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
-
+      </Pressable>
+      <Pressable style={styles.card} onPress={() => { toggleAmazonSelected(!amazonSelected) }}>
+      {amazonSelected ?
+            <Fontisto name="checkbox-active" size={24} color="green" />
+            :
+            <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />}
         <Text style={styles.title}>{filterableStores.amazon_dot_com.displayName}</Text>
-      </View>
-      <View style={styles.card}>
-      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
-
+      </Pressable>
+      <Pressable style={styles.card} onPress={() => { toggleStaplesSelected(!staplesSelected) }}>
+      {staplesSelected ?
+            <Fontisto name="checkbox-active" size={24} color="green" />
+            :
+            <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />}
         <Text style={styles.title}>{filterableStores.staples.displayName}</Text>
-      </View>
-      <View style={styles.card}>
-      <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />
-        <Text style={styles.title}>{filterableStores.office_depot.displayName}</Text>
-      </View>
+      </Pressable>
+      <Pressable style={styles.card} onPress={() => { toggleOfficeDepotSelected(!officeDepotSelected) }}>
+      {officeDepotSelected ?
+            <Fontisto name="checkbox-active" size={24} color="green" />
+            :
+            <Fontisto name="checkbox-passive" flex={.5} size={24} color="black" />}        
+            <Text style={styles.title}>{filterableStores.office_depot.displayName}</Text>
+      </Pressable>
     </SafeAreaView>
   );
 }
@@ -200,7 +249,11 @@ const styles = StyleSheet.create({
     marginLeft: 7.5,
     marginRight: 7.5,
     height: Dimensions.get('window').height / 4,
-    width: Dimensions.get('window').width -10.5
+    width: Dimensions.get('window').width - 10.5
+  },
+  pressable: {
+    width: 100,
+    flex: .5
   }
 
 });
