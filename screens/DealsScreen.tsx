@@ -7,71 +7,11 @@ const DealsScreen = ({ navigation, route }: RootTabScreenProps<'Deals'>) => {
   let filterParameters;
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
-  const [products, fetchProducts] = useState([]);
+  const [products, setProducts] = useState([]);
 
   const routeParameters = route.params;
-  // if(route.params){
-  //   if(route.params.filterVaules){
-  //       let filterValues = route.params.filterVaules;
-  //       let itemsToFilter = filterValues.length;
-  //       let arrayInedexes = itemsToFilter - 1;
-  //       let filterParameters=[];
-  //       switch (arrayInedexes) {
-  //         case 0:
-  //           filterParameters = filterValues[0];
-  //            break;
-  //         case 1:
-  //           filterParameters = filterValues[0 && 1];
-  //           break;
-  //           case 2:
-  //           filterParameters = filterValues[0 && 1 && 2]
-  //           break;
-  //           case 3:
-  //           filterParameters = filterValues[0 && 1 && 2 && 3];
-  //           break;
-  //           case 4:
-  //           filterParameters = filterValues[0 && 1 && 2 && 3 && 4];
-  //           break;
-  //           case 5:
-  //           filterParameters = filterValues[0 && 1 && 2 && 3 && 4 && 5]
-  //           break;
-  //           case 6:
-  //           filterParameters = filterValues[0 && 1 && 2 && 3 && 4 && 5 && 6];
-  //           break;
-  //           case 7:
-  //           filterParameters = filterValues[0 && 1 && 2 && 3 && 4 && 5 && 6 && 7];
-  //           break;
-  //           case 8:
-  //           filterParameters = filterValues[0 && 1 && 2 && 3 && 4 && 5 && 6 && 7 && 8]
-  //           break;
-  //           case 9:
-  //             filterParameters = filterValues[0 && 1 && 2 && 3 && 4 && 5 && 6 && 7 && 8 && 9] 
-  //             break;
-  //             case 10:
-  //           filterParameters = filterValues[0 && 1 && 2 && 3 && 4 && 5 && 6 && 7 && 8 && 9 &&10 ]
-  //           break;
-  //           case 11:
-  //           filterParameters = filterValues[0 && 1 && 2 && 3 && 4 && 5 && 6 && 7 && 8 && 9 &&10&&11 ]
-  //           break;
-  //           case 12:
-  //             filterParameters = filterValues[0 && 1 && 2 && 3 && 4 && 5 && 6 && 7 && 8 && 9 && 10 && 11 && 12 ]
-  //             break;
-  //             case 13:
-  //           filterParameters = filterValues[0 && 1 && 2 && 3 && 4 && 5 && 6 && 7 && 8 && 9 && 10 && 11 && 12 && 14 ]
-  //           break;
-  //           case 14:
-  //           filterParameters = filterValues[0 && 1 && 2 && 3 && 4 && 5 && 6 && 7 && 8 && 9 && 10 && 11 && 12 && 14 && 15]
-  //           default:
-  //             return filterParameters
 
-  //       } 
-  //       console.log(filterParameters);
-        
-         
-     
-  //   } 
-  // }
-  const renderProduct = (product: Object) => {
+  const renderProduct = product => {
     product = product.item;
     return <ProductCard product={product} />;
   };
@@ -87,9 +27,10 @@ const DealsScreen = ({ navigation, route }: RootTabScreenProps<'Deals'>) => {
         }
       });
 
-    const dataJSON = await response.json();
-    dataJSON.products?setLoading(false):null
-    return fetchProducts(dataJSON.products);
+      const dataJSON = await response.json();
+      await setProducts(dataJSON.products);
+      return  dataJSON.products?setLoading(false):null
+
     }
     catch {
       setLoading(false);
@@ -99,7 +40,7 @@ const DealsScreen = ({ navigation, route }: RootTabScreenProps<'Deals'>) => {
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
       try {
-        getDealsFromApi();
+       await getDealsFromApi();
         setRefreshing(false);
       } catch (error) {
         console.error(error);
@@ -117,7 +58,7 @@ const DealsScreen = ({ navigation, route }: RootTabScreenProps<'Deals'>) => {
       <FlatList
         data={products}
         renderItem={renderProduct}
-        keyExtractor={(product, index) => index}
+        keyExtractor={product => product.id}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       />
 
